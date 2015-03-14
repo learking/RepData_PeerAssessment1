@@ -7,12 +7,26 @@ output:
 
 
 ## Loading and preprocessing the data
-
-
+```{r}
+library(data.table)
+rawDT = read.csv("activity.csv")
+rawTable = data.table(rawDT)
+```
 
 ## What is mean total number of steps taken per day?
 
+```{r}
+totStepsPerDay = rawTable[, list(tot=sum(steps)), by=date]
+```
 
+```{r}
+hist(totStepsPerDay$tot[!is.na(totStepsPerDay$tot)])
+```
+
+```{r}
+mean(totStepsPerDay$tot[!is.na(totStepsPerDay$tot)])
+median(totStepsPerDay$tot[!is.na(totStepsPerDay$tot)])
+```
 
 ## What is the average daily activity pattern?
 
